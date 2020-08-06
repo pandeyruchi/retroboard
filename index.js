@@ -1,5 +1,5 @@
-'use strict';
 
+'use strict';
 const port = 8010;
 const Sequelize = require('sequelize');
 const sqlite3 = require('sqlite3').verbose();

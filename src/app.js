@@ -28,9 +28,11 @@ app.use(logRequest);
 app.use(jsonParser);
 module.exports = (db) => {
    
-    app.get('/health', (req, res) => res.send('Healthy'))
+    app.get('/health', (req, res) => res.send('Healthy'))   
 
-    require('./author/route')(app,db,logger);
+    require('./author')(app,db,logger);
+
+    require('./points')(app,db,logger);
 
     return app
 }

@@ -35,10 +35,9 @@
         }
       }
     },
-    "/signup": {
-      
+    "/signup": {      
       "post": {
-        "tags": ["author"],
+        "tags": ["Author"],
         "description": "Create new Author",
         "operationId": "Create new Author ",
         "parameters": [{
@@ -69,7 +68,7 @@
     "/login": {
       
       "post": {
-        "tags": ["author"],
+        "tags": ["Author"],
         "description": "Login Author",
         "operationId": "Login Author ",
         "parameters": [{
@@ -95,6 +94,147 @@
           }
         }
       }
+    },
+    "/points": {      
+      "post": {
+        "tags": ["Points"],
+        "description": "Create new Point",
+        "operationId": "Create new Point ",
+        "parameters": [{
+          "name": "point",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Point"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Added a new point to list of Points",
+            "schema": {
+              "$ref": "#/definitions/Point"
+            }
+          },
+          "400": {
+            "description": "Invalid Point, Unknown error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Points"],
+        "summary": "Get points",
+        "description": "Returns all the points from server",
+        "parameters": [{
+            "name": "limit",
+            "in": "query",
+            "description": "The retro points that needs to be fetched.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The retro points that needs to be fetched.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A List of Points",
+            "schema": {
+              "$ref": "#/definitions/Point"
+            }
+          },
+          "404": {
+            "description": "POINTS_NOT_FOUND_ERROR",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }      
+    },
+    "/points/{id}": {
+      "get": {
+        "tags": ["Points"],
+        "summary" : "Get Point corresponding to the id",
+        "description": "Return points based on ID",
+        "operationId": "find point by id",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "ID of retro point to fetch",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }],
+        "responses": {
+          "200": {
+            "description": "point response",
+            "schema": {
+              "$ref": "#/definitions/Point"
+            }
+          },
+          "404": {
+            "description": "POINTS_NOT_FOUND_ERROR",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+
+      "patch": {
+        "tags": ["Points"],
+        "description": "update points based on ID",
+        "operationId": "update point by id",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "ID of retro point to update",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        },{
+          "name": "point",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Point"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "point response",
+            "schema": {
+              "$ref": "#/definitions/Point"
+            }
+          },
+          "404": {
+            "description": "POINTS_NOT_FOUND_ERROR",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+      
     }
   },
 
@@ -117,16 +257,36 @@
         }
       }
     },
+    "Point":{
+      "type":"object",
+      "required":["title","category"],
+      "properties":{
+       
+        "title":{
+          "type":"string",
+          "example":"sprint 1"
+        },
+        "description":{
+          "type":"string",
+          "example":"Involves Bug fixing and release x feature of y module"
+        },
+        "category":{
+          "type":"enum",
+          "example":"Went well"
+        }
+      }
+
+    },
     "ErrorResponse": {
       "type": "object",
       "properties": {
         "error_code": {
           "type": "string",
-          "example": "AUTHOR_NOT_FOUND_ERROR"
+          "example": "NOT_FOUND_ERROR"
         },
         "message": {
           "type": "string",
-          "example": "Could not find any author"
+          "example": "Could not find any response"
         }
       }
     }
