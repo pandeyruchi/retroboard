@@ -1,0 +1,22 @@
+{
+  "name": "retroboard",
+  "version": "1.0.0",
+  "description": "Build a sprint retrospective board to streamline the process of conducting a retrospective",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandeyruchi/retroboard.git"
+  },
+  "author": "Ruchi Pandey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pandeyruchi/retroboard/issues"
+  },
+  "homepage": "https://github.com/pandeyruchi/retroboard#readme",
+  "dependencies": {
+    "sqlite3": "^5.0.0"
+  }
+}
