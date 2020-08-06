@@ -1,0 +1,134 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Build a sprint retrospective board to streamline the process of conducting a retrospective meeting.",
+    "version": "1.0.0",
+    "title": "Retrospective Board",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:8010",
+  "basePath": "",
+  "tags": [{
+      "name": "health",
+      "description": "Check health of server"
+    },
+    {
+      "name": "Retro Board",
+      "description": "Retro Board rest Apis"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": ["health"],
+        "description": "Get health status of server",
+        "responses": {
+          "200": {
+            "description": "Healthy"
+          }
+        }
+      }
+    },
+    "/signup": {
+      
+      "post": {
+        "tags": ["author"],
+        "description": "Create new Author",
+        "operationId": "Create new Author ",
+        "parameters": [{
+          "name": "author",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Author"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Added a new author to list of Authors",
+            "schema": {
+              "$ref": "#/definitions/Author"
+            }
+          },
+          "400": {
+            "description": "Invalid Author, Unknown error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+
+    "/login": {
+      
+      "post": {
+        "tags": ["author"],
+        "description": "Login Author",
+        "operationId": "Login Author ",
+        "parameters": [{
+          "name": "author",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Author"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Succesfully Logged in Author",
+            "schema": {
+              "$ref": "#/definitions/Author"
+            }
+          },
+          "400": {
+            "description": "Invalid Author, Unknown error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "Author": {
+      "type": "object",
+      "required": ["name", "email", "password"],
+      "properties": {            
+        "name": {
+          "type": "string",
+          "example": "Tim Cook"
+        },
+        "email": {
+          "type": "string",
+          "example": "timcook@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "newpwd123"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error_code": {
+          "type": "string",
+          "example": "AUTHOR_NOT_FOUND_ERROR"
+        },
+        "message": {
+          "type": "string",
+          "example": "Could not find any author"
+        }
+      }
+    }
+  }
+}
