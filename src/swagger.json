@@ -37,6 +37,7 @@
         "tags": [
           "health"
         ],
+        "summary": "get health status",
         "description": "Get health status of server",
         "responses": {
           "200": {
@@ -50,6 +51,7 @@
         "tags": [
           "Author"
         ],
+        "summary": "sign up Author",
         "description": "Create new Author",
         "operationId": "Create new Author ",
         "parameters": [
@@ -83,6 +85,7 @@
         "tags": [
           "Author"
         ],
+        "summary": "login to get auth token",
         "description": "Login Author",
         "operationId": "Login Author ",
         "parameters": [
@@ -116,6 +119,7 @@
         "tags": [
           "Points"
         ],
+        "summary": "create points",
         "security": [
           {
             "Bearer": []
@@ -152,7 +156,7 @@
         "tags": [
           "Points"
         ],
-        "summary": "Get points",
+        "summary": "get points",
         "description": "Returns all the points from server",
         "parameters": [
           {
@@ -200,8 +204,8 @@
         "tags": [
           "Points"
         ],
-        "summary": "Get Point corresponding to the id",
-        "description": "Return points based on ID",
+        "summary": "get point corresponding to the id",
+        "description": "Return point based on ID",
         "operationId": "find point by id",
         "parameters": [
           {
@@ -243,7 +247,8 @@
             "Bearer": []
           }
         ],
-        "description": "update points based on ID",
+        "summary": "update point corresponding to id",
+        "description": "update point based on ID",
         "operationId": "update point by id",
         "parameters": [
           {
@@ -293,7 +298,8 @@
             "Bearer": []
           }
         ],
-        "description": "delete points based on ID",
+        "summary": "delete point corresponding to id",
+        "description": "delete point based on ID",
         "operationId": "delete point by id",
         "parameters": [
           {
@@ -368,7 +374,8 @@
         },
         "category": {
           "type": "string",
-          "example": "Went well"
+          "example": "Went well",
+          "summary": "valid options are [Went well, Didn't go well, Need to improve, extras]"
         }
       }
     },

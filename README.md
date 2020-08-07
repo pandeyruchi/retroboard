@@ -33,3 +33,5 @@ Create a REST API for the following requirements.
 ## API DOC
 
 * Open http://localhost:8010/api-docs/#/
+
+![alt api-docs](api_docs.png)
