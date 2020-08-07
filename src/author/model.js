@@ -2,8 +2,7 @@ const Sequelize = require('sequelize');
 const crypto = require('crypto');
 
 module.exports = (sequelize) => {
-    const Author = sequelize.define('author', {
-
+    const Author = sequelize.define('authors', {
         name: {
             type: Sequelize.STRING,
             allowNull: false,
@@ -70,10 +69,5 @@ module.exports = (sequelize) => {
     }
     Author.beforeCreate(setSaltAndPassword)
     Author.beforeUpdate(setSaltAndPassword)
-
-    Author.associate = (models) => {
-        Author.belongsTo(models.author);
-    };
-
     return Author;
 }

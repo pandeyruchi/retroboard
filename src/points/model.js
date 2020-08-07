@@ -1,16 +1,17 @@
 const Sequelize = require('sequelize')
 
+
 module.exports = (sequelize) => {
-    const Point = sequelize.define('point',{
-        id :{
+    const Point = sequelize.define('points', {
+        id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        title:{
+        title: {
             type: Sequelize.STRING,
-            allowNull:false,
-            field:'title',
+            allowNull: false,
+            field: 'title',
             validate: {
                 notEmpty: {
                     msg: "Title must be a non empty string"
@@ -20,20 +21,29 @@ module.exports = (sequelize) => {
                 }
             }
         },
-        description:{
-            type:Sequelize.STRING,
-            allowNull:false,
-            field:'description'
+        description: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            field: 'description'
         },
-        category:{
+        author: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            field: 'description'
+        },
+        category: {
             type: Sequelize.ENUM,
-            values:['Went well',"Didn't go well","Need to improve","extras"]
+            allowNull: false,
+            values: ['Went well', "Didn't go well", "Need to improve", "extras"],
+            validate: {
+                isIn: {
+                    args: [
+                        ['Went well', "Didn't go well", "Need to improve", "extras"]
+                    ],
+                    msg: 'category should be one of Went well,Didnt go well,Need to improve,extras'
+                }
+            }
         }
     })
-
-    Point.associate = (models) =>{
-        Point.belongsTo(models.Point);
-    };
-
     return Point;
 }

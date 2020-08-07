@@ -27,12 +27,13 @@ const logRequest = (req, res, next) => {
 app.use(logRequest);
 app.use(jsonParser);
 module.exports = (db) => {
-   
-    app.get('/health', (req, res) => res.send('Healthy'))   
-
-    require('./author')(app,db,logger);
-
-    require('./points')(app,db,logger);
+    
+    app.get('/health', (req, res) => res.send('Healthy'))
+    const Author = require('./author/model')(db)
+    const Point = require('./points/model')(db)
+    
+    require('./author')(app, Author, logger);
+    require('./points')(app, Point, logger);
 
     return app
 }

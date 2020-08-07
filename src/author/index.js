@@ -6,8 +6,7 @@ const {
     handleNotFound,
     handleBadRequest
 } = require('../error')
-module.exports = (app, db, logger) => {
-    const Author = require('./model')(db)
+module.exports = (app, Author, logger) => {
 
     app.post('/signup', async (req, res) => {
         try {
@@ -24,13 +23,16 @@ module.exports = (app, db, logger) => {
     app.post('/login', async (req, res) => {
         try {
             let author = await Author.findByPk(req.body.email)
-            if (!!author && author.isCorrectPassword(req.body.password))
-                res.send(generateToken(author))
-            else
+            if (!!author && author.isCorrectPassword(req.body.password)) {
+                let token = generateToken(author)
+                res.header("Authorization", `Bearer ${token}`).send(token)                
+            } else
                 handleNotFound(res)
         } catch (err) {
             logger.error(err)
             handleServerError(res)
         }
     })
+
+
 }
