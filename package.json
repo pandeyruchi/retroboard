@@ -23,7 +23,7 @@
   ],
   "nyc": {
     "check-coverage": true,
-    "branches": 100,
+    "branches": 90,
     "lines": 100,
     "functions": 100,
     "statements": 100
@@ -40,8 +40,9 @@
   },
   "devDependencies": {
     "eslint": "^7.6.0",
+    "mocha": "^8.1.1",
     "nyc": "^15.1.0",
-    "supertest": "^4.0.2",
-    "mocha": "^8.1.1"
+    "pre-push": "^0.1.1",
+    "supertest": "^4.0.2"
   }
 }
