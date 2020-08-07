@@ -62,10 +62,10 @@ module.exports = (sequelize) => {
     }
 
     const setSaltAndPassword = author => {
-        if (author.changed('password')) {
+       if (author.changed('password')) {
             author.salt = Author.generateSalt()
             author.password = Author.encryptPassword(author.password(), author.salt())
-        }
+       }
     }
     Author.beforeCreate(setSaltAndPassword)
     Author.beforeUpdate(setSaltAndPassword)

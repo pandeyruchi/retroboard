@@ -3,11 +3,11 @@
 const jwt = require('jsonwebtoken')
 
 const JWT_SECRET = "abcdefg123"
+const {
+  handleUnauthorized
+} = require('./error')
 
 function generateToken(user) {
-
-  if (!user) return null;
-
   var payload = {
     email: user.email,
     name: user.name
@@ -29,16 +29,10 @@ async function authenticate(req, res, next) {
       console.log(user)
       next();
     } else {
-      res.status(401).send({
-        error: "NOT_AUTHENTICATED",
-        message: "Invalid user."
-      })
+      handleUnauthorized(res)
     }
   } catch (err) {
-    res.status(401).send({
-      error: "NOT_AUTHENTICATED",
-      message: "Invalid user."
-    })
+    handleUnauthorized(res)
   }
 }
 
